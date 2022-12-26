@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Box } from "components/Box/Box";
 import { NavLink } from "react-router-dom";
 
+
 const Home = () => {
   const [trendings, setTrendings] = useState([]);
     
@@ -26,8 +27,9 @@ const Home = () => {
             <li key={trending.id}>
               <NavLink to={`/movies/${trending.id}`}>{trending.title}</NavLink>
               </li>
-          )})}
-          </ul>
+          )
+        })}
+        </ul>
       </Box>
     </div>
   )

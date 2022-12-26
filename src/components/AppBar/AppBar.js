@@ -1,6 +1,7 @@
 import { Box } from "components/Box/Box";
 import { NavItem } from './AppBar.styled';
 
+
 const navItems = [
   { href: '/', text: 'Home' },
   { href: '/movies', text: 'Movies' },
@@ -14,6 +15,6 @@ export const AppBar = () => {
             {text}
           </NavItem>
         ))}
-      </Box>
+    </Box>
   );
 };
