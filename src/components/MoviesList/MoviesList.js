@@ -1,15 +1,17 @@
 import { NavLink } from 'react-router-dom';
+import { List, Item } from './MoviesList.styled';
+
 
 export const MoviesList = ({ movies }) => {
   return (
-   <ul>
+   <List>
       {movies.map(({ id, title}) => {
         return (
-          <li key={id}>
+          <Item key={id}>
            <NavLink to={`/movies/${id}`}>{title}</NavLink>
-          </li>
+          </Item>
         );
       })}
-    </ul>
+    </List>
      );
 };

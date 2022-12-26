@@ -1,7 +1,7 @@
-import { useParams, Link, NavLink, Outlet, useLocation, } from 'react-router-dom';
+import { useParams, Outlet, useLocation, } from 'react-router-dom';
 import { detalisMovie } from 'API';
 import { useEffect, useState, Suspense } from 'react';
-import { Image, Information, Card } from './MovieDetalis.styled';
+import { Image, Information, Card, Links, List, Item, NavLinks } from './MovieDetalis.styled';
 
 const BASE_IMAGE_URL = 'https://image.tmdb.org/t/p/w500';
 
@@ -27,11 +27,9 @@ const MovieDetails = () => {
 const releaseYear = new Date(detalis.release_date);
  const back = location.state?.from ?? '/';
 
-
-
   return (
     <div>
-             <NavLink to={back}>🡸 Go back</NavLink>
+             <NavLinks to={back}>🡸 Go back</NavLinks>
       <Card>
         <Image
           src={`${BASE_IMAGE_URL}${detalis.poster_path}`}
@@ -49,15 +47,15 @@ const releaseYear = new Date(detalis.release_date);
           <p>{genreList.join(', ')}</p>
         </Information>
       </Card>
-      <ul>
+      <List>
         <p>Additional information</p>
-        <li>
-          <Link to="cast">Cast</Link>
-        </li>
-        <li>
-          <Link to="reviews">Reviews</Link>
-        </li>
-      </ul>
+        <Item>
+          <Links to="cast">Cast</Links>
+        </Item>
+        <Item>
+          <Links to="reviews">Reviews</Links>
+        </Item>
+      </List>
        <Suspense fallback={<h1>Movie Details to be appeared</h1>}>
       <Outlet />
       </Suspense>

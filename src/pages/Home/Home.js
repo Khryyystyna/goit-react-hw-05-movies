@@ -2,7 +2,7 @@ import { getTrending } from "API";
 import { useState, useEffect } from 'react';
 import { Box } from "components/Box/Box";
 import { NavLink } from "react-router-dom";
-
+import { Title, List, Item } from './Home.styled';
 
 const Home = () => {
   const [trendings, setTrendings] = useState([]);
@@ -20,16 +20,16 @@ const Home = () => {
   return (
     <div>
       <Box as='nav' display='flex' flexDirection='column'>
-        <h1>Trendings today</h1>
-        <ul>
+        <Title>Trendings today</Title>
+        <List>
         {trendings.map(trending => {
           return (
-            <li key={trending.id}>
+            <Item key={trending.id}>
               <NavLink to={`/movies/${trending.id}`}>{trending.title}</NavLink>
-              </li>
+              </Item>
           )
         })}
-        </ul>
+        </List>
       </Box>
     </div>
   )
