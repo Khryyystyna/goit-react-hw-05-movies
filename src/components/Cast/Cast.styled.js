@@ -5,8 +5,11 @@ export const List = styled.ul`
 `;
 
 export const Item = styled.li`
-  list-style: square;
   &:not(:last-child) {
     margin-bottom: 10px;
   }
+`;
+
+export const Image = styled.img`
+  width: 100px;
 `;

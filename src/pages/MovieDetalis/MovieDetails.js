@@ -1,27 +1,37 @@
-import { useParams, Link, Outlet } from 'react-router-dom';
+import { useParams, Link, NavLink, Outlet, useLocation, } from 'react-router-dom';
 import { detalisMovie } from 'API';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { Image, Information, Card } from './MovieDetalis.styled';
 
 const BASE_IMAGE_URL = 'https://image.tmdb.org/t/p/w500';
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
   const [detalis, setDetalis] = useState({});
   const { movieId } = useParams();
+  const [genreList, setGenreList] = useState([]);
+  const location = useLocation();
     
   useEffect(() => {
     detalisMovie(movieId)
-      .then(setDetalis)
+      .then(detalis => {
+        setDetalis(detalis);
+        const genreList = [];
+        detalis.genres.forEach(({ name }) => genreList.push(name));
+        setGenreList(genreList);
+      })
       .catch(error => {
         return console.log(error);
       });
   }, [movieId]);
 
-  const releaseYear = new Date(detalis.release_date);
+const releaseYear = new Date(detalis.release_date);
+ const back = location.state?.from ?? '/';
+
+
 
   return (
     <div>
-      <Link to="/">Go back</Link>
+             <NavLink to={back}>🡸 Go back</NavLink>
       <Card>
         <Image
           src={`${BASE_IMAGE_URL}${detalis.poster_path}`}
@@ -29,14 +39,14 @@ export const MovieDetails = () => {
           width="320"
         />
         <Information>
-          <h3>
+          <h2>
             {detalis.title} ({releaseYear.getFullYear()})
-          </h3>
-          <p>User score: </p>
-          <h5>Overview</h5>
+          </h2>
+          <p>User score: {detalis.vote_count} </p>
+          <h3>Overview</h3>
           <p>{detalis.overview}</p>
-          <h5>Genres</h5>
-          <p></p>
+          <h4>Genres</h4>
+          <p>{genreList.join(', ')}</p>
         </Information>
       </Card>
       <ul>
@@ -48,7 +58,11 @@ export const MovieDetails = () => {
           <Link to="reviews">Reviews</Link>
         </li>
       </ul>
+       <Suspense fallback={<h1>Movie Details to be appeared</h1>}>
       <Outlet />
+      </Suspense>
     </div>
   );
 };
+
+export default MovieDetails;

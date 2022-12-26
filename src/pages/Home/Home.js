@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Box } from "components/Box/Box";
 import { NavLink } from "react-router-dom";
 
-export const Home = () => {
+const Home = () => {
   const [trendings, setTrendings] = useState([]);
     
   useEffect(() => {
@@ -32,3 +32,5 @@ export const Home = () => {
     </div>
   )
 }
+
+export default Home;

@@ -17,3 +17,4 @@ export const Information = styled.div`
 
 `;
 
+

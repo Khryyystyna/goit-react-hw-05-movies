@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { creditsMovie } from 'API';
-import { Box } from './Box/Box';
-import { List, Item } from './Cast.styled';
+import { Box } from '../Box/Box';
+import { List, Item, Image } from './Cast.styled';
 
 const BASE_IMAGE_URL = 'https://image.tmdb.org/t/p/w500';
 
-export const Cast = () => {
-    const[credits, setCredits] = useState({});
+const Cast = () => {
+    const[credits, setCredits] = useState([]);
     const { movieId } = useParams();
 
 useEffect(() => {
@@ -27,7 +27,7 @@ useEffect(() => {
                      return (
                      <Item key={credit_id}>
                          <Box width="10%">
-                             <img src={`${BASE_IMAGE_URL}${profile_path}`} alt={name}></img>
+                             <Image src={`${BASE_IMAGE_URL}${profile_path}`} alt={name}/>
                          </Box>
                          <p>{name}</p>
                          <p>Character: {character}</p>
@@ -39,3 +39,4 @@ useEffect(() => {
   );
 };
 
+export default Cast;
